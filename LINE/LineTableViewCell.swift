@@ -10,6 +10,8 @@ import UIKit
 
 class LineTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var messageLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

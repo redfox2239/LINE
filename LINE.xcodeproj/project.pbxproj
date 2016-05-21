@@ -13,6 +13,14 @@
 		7FFBBA811BA5CB0100F2B122 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FFBBA801BA5CB0100F2B122 /* Images.xcassets */; };
 		7FFBBA841BA5CB0100F2B122 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FFBBA821BA5CB0100F2B122 /* LaunchScreen.xib */; };
 		7FFBBA901BA5CB0100F2B122 /* LINETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFBBA8F1BA5CB0100F2B122 /* LINETests.swift */; };
+		7FFBBA9A1BA5CD8B00F2B122 /* LineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFBBA991BA5CD8B00F2B122 /* LineTableViewCell.swift */; };
+		7FFBBA9D1BA5D1DF00F2B122 /* LineMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFBBA9B1BA5D1DF00F2B122 /* LineMessageTableViewCell.swift */; };
+		7FFBBA9E1BA5D1DF00F2B122 /* LineMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FFBBA9C1BA5D1DF00F2B122 /* LineMessageTableViewCell.xib */; };
+		7FFBBAA11BA5E9B600F2B122 /* 吹き出し.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FFBBA9F1BA5E73E00F2B122 /* 吹き出し.png */; };
+		7FFBBAA71BA6F8C000F2B122 /* 吹き出し2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FFBBAA61BA6F8C000F2B122 /* 吹き出し2.png */; };
+		7FFBBAA91BA6FD0800F2B122 /* 背景.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FFBBAA81BA6FD0800F2B122 /* 背景.jpg */; };
+		7FFBBAAC1BA7001800F2B122 /* LeftTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFBBAAA1BA7001800F2B122 /* LeftTableViewCell.swift */; };
+		7FFBBAAD1BA7001800F2B122 /* LeftTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FFBBAAB1BA7001800F2B122 /* LeftTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +44,14 @@
 		7FFBBA891BA5CB0100F2B122 /* LINETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LINETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FFBBA8E1BA5CB0100F2B122 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FFBBA8F1BA5CB0100F2B122 /* LINETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LINETests.swift; sourceTree = "<group>"; };
+		7FFBBA991BA5CD8B00F2B122 /* LineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineTableViewCell.swift; sourceTree = "<group>"; };
+		7FFBBA9B1BA5D1DF00F2B122 /* LineMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineMessageTableViewCell.swift; sourceTree = "<group>"; };
+		7FFBBA9C1BA5D1DF00F2B122 /* LineMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LineMessageTableViewCell.xib; sourceTree = "<group>"; };
+		7FFBBA9F1BA5E73E00F2B122 /* 吹き出し.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "吹き出し.png"; sourceTree = "<group>"; };
+		7FFBBAA61BA6F8C000F2B122 /* 吹き出し2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "吹き出し2.png"; sourceTree = "<group>"; };
+		7FFBBAA81BA6FD0800F2B122 /* 背景.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "背景.jpg"; sourceTree = "<group>"; };
+		7FFBBAAA1BA7001800F2B122 /* LeftTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftTableViewCell.swift; sourceTree = "<group>"; };
+		7FFBBAAB1BA7001800F2B122 /* LeftTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +99,11 @@
 				7FFBBA801BA5CB0100F2B122 /* Images.xcassets */,
 				7FFBBA821BA5CB0100F2B122 /* LaunchScreen.xib */,
 				7FFBBA771BA5CB0100F2B122 /* Supporting Files */,
+				7FFBBA991BA5CD8B00F2B122 /* LineTableViewCell.swift */,
+				7FFBBA9B1BA5D1DF00F2B122 /* LineMessageTableViewCell.swift */,
+				7FFBBA9C1BA5D1DF00F2B122 /* LineMessageTableViewCell.xib */,
+				7FFBBAAA1BA7001800F2B122 /* LeftTableViewCell.swift */,
+				7FFBBAAB1BA7001800F2B122 /* LeftTableViewCell.xib */,
 			);
 			path = LINE;
 			sourceTree = "<group>";
@@ -90,6 +111,9 @@
 		7FFBBA771BA5CB0100F2B122 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7FFBBAA81BA6FD0800F2B122 /* 背景.jpg */,
+				7FFBBAA61BA6F8C000F2B122 /* 吹き出し2.png */,
+				7FFBBA9F1BA5E73E00F2B122 /* 吹き出し.png */,
 				7FFBBA781BA5CB0100F2B122 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -156,6 +180,7 @@
 		7FFBBA6C1BA5CB0100F2B122 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "reo harada";
 				TargetAttributes = {
@@ -193,8 +218,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FFBBA7F1BA5CB0100F2B122 /* Main.storyboard in Resources */,
+				7FFBBAA11BA5E9B600F2B122 /* 吹き出し.png in Resources */,
+				7FFBBA9E1BA5D1DF00F2B122 /* LineMessageTableViewCell.xib in Resources */,
 				7FFBBA841BA5CB0100F2B122 /* LaunchScreen.xib in Resources */,
+				7FFBBAAD1BA7001800F2B122 /* LeftTableViewCell.xib in Resources */,
 				7FFBBA811BA5CB0100F2B122 /* Images.xcassets in Resources */,
+				7FFBBAA91BA6FD0800F2B122 /* 背景.jpg in Resources */,
+				7FFBBAA71BA6F8C000F2B122 /* 吹き出し2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +242,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FFBBA9A1BA5CD8B00F2B122 /* LineTableViewCell.swift in Sources */,
+				7FFBBAAC1BA7001800F2B122 /* LeftTableViewCell.swift in Sources */,
+				7FFBBA9D1BA5D1DF00F2B122 /* LineMessageTableViewCell.swift in Sources */,
 				7FFBBA7C1BA5CB0100F2B122 /* ViewController.swift in Sources */,
 				7FFBBA7A1BA5CB0100F2B122 /* AppDelegate.swift in Sources */,
 			);
@@ -409,6 +442,7 @@
 				7FFBBA951BA5CB0100F2B122 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7FFBBA961BA5CB0100F2B122 /* Build configuration list for PBXNativeTarget "LINETests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +451,7 @@
 				7FFBBA981BA5CB0100F2B122 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
