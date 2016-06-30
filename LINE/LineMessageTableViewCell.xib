@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,20 +15,34 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="吹き出し.png" id="ys4-o3-FDA">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="吹き出し.png" translatesAutoresizingMaskIntoConstraints="NO" id="ys4-o3-FDA">
                         <rect key="frame" x="153" y="8" width="159" height="114"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="114" id="9TV-t7-L9K"/>
+                            <constraint firstAttribute="width" constant="159" id="UoC-6B-zhI"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" id="u2R-16-eS7">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2R-16-eS7">
                         <rect key="frame" x="167" y="18" width="109" height="94"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="109" id="9YA-P2-dg2"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="ys4-o3-FDA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="0Wr-Gh-zvu"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="u2R-16-eS7" secondAttribute="trailing" constant="36" id="37l-BE-Fpi"/>
+                    <constraint firstItem="u2R-16-eS7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="SBT-Dc-YbG"/>
+                    <constraint firstItem="ys4-o3-FDA" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="eYx-6Y-ebo"/>
+                    <constraint firstItem="ys4-o3-FDA" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="g5D-e7-bdd"/>
+                    <constraint firstItem="ys4-o3-FDA" firstAttribute="centerY" secondItem="u2R-16-eS7" secondAttribute="centerY" id="vrw-BE-eyC"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="heightMessageImageView" destination="9TV-t7-L9K" id="hg2-qw-Cba"/>
                 <outlet property="messageImageView" destination="ys4-o3-FDA" id="dlz-I4-EMI"/>
                 <outlet property="messageLabel" destination="u2R-16-eS7" id="Ya8-9F-cVY"/>
             </connections>
@@ -36,9 +52,4 @@
     <resources>
         <image name="吹き出し.png" width="257" height="126"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

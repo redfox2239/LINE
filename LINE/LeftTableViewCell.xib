@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,23 +12,47 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="吹き出し2.png" id="hgK-lY-2xx">
-                        <rect key="frame" x="8" y="11" width="159" height="114"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="吹き出し2.png" translatesAutoresizingMaskIntoConstraints="NO" id="hgK-lY-2xx">
+                        <rect key="frame" x="8" y="11" width="159" height="116"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="116" id="TeV-9s-oCa"/>
+                            <constraint firstAttribute="width" constant="159" id="sGS-dM-sGO"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" id="FoX-Wi-PGj">
-                        <rect key="frame" x="42" y="21" width="109" height="94"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FoX-Wi-PGj">
+                        <rect key="frame" x="42" y="21" width="109" height="96"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="109" id="rb7-pa-OIq"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="hgK-lY-2xx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="4Oc-U9-jm7"/>
+                    <constraint firstItem="FoX-Wi-PGj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="34" id="5cE-BY-rAR"/>
+                    <constraint firstItem="hgK-lY-2xx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="8Aw-By-gCa"/>
+                    <constraint firstItem="hgK-lY-2xx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="K0k-K7-0Us"/>
+                    <constraint firstItem="hgK-lY-2xx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="OXg-Z7-5yY"/>
+                    <constraint firstItem="hgK-lY-2xx" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="Pcp-V6-xYI"/>
+                    <constraint firstAttribute="bottom" secondItem="hgK-lY-2xx" secondAttribute="bottom" constant="8" id="ieq-2Y-T5h"/>
+                    <constraint firstItem="hgK-lY-2xx" firstAttribute="centerY" secondItem="FoX-Wi-PGj" secondAttribute="centerY" id="kTE-We-J9I"/>
+                    <constraint firstItem="FoX-Wi-PGj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="13" id="l5e-U7-UGy"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="K0k-K7-0Us"/>
+                        <exclude reference="OXg-Z7-5yY"/>
+                        <exclude reference="Pcp-V6-xYI"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="heightMessageImageView" destination="TeV-9s-oCa" id="PDG-nY-yRT"/>
                 <outlet property="messageImageView" destination="hgK-lY-2xx" id="fD2-89-ydi"/>
                 <outlet property="messageLabel" destination="FoX-Wi-PGj" id="8xk-jh-SeP"/>
             </connections>
@@ -36,9 +62,4 @@
     <resources>
         <image name="吹き出し2.png" width="259" height="129"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

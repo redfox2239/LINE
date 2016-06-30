@@ -12,6 +12,7 @@ class LeftTableViewCell: UITableViewCell {
 
     @IBOutlet weak var messageImageView: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var heightMessageImageView: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()

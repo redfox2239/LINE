@@ -8,14 +8,17 @@
 
 import UIKit
 
+// tableViewを使う準備その１
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     @IBOutlet weak var commentView: UIView!
     @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var lineTableView: UITableView!
-    var data:Array<String> = []
-    var dataType:Array<String> = []
-    var someOneData:Array<String> = [
+    @IBOutlet weak var marginBottomCommentView: NSLayoutConstraint!
+    // データをDictionaryで用意
+    var data: [[String: String]] = []
+    // 返信用データをDictionaryで用意
+    var someOneData: [String] = [
         "今度の日曜日はどこにいく？",
         "旅行行きたいな〜。旅行行きたいとこある？",
         "この前の土曜日のドラマみた？ｗ\nまさかあの人が犯人だと思わないよね？ｗ",
@@ -27,26 +30,34 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         "ε-(/･ω･)/ ﾄｫｰｯ!!",
         "o(｀ω´*)oﾌﾟﾝｽｶﾌﾟﾝｽｶ!!",
     ]
+    // 返信用タイマーを用意
     var timer:NSTimer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // tableViewを利用する準備その２
         self.lineTableView.delegate = self
         self.lineTableView.dataSource = self
         
+        // tableViewの背景を透明にする
         self.lineTableView.backgroundColor = UIColor.clearColor()
         
+        //カスタムセルの登録
         let cell = UINib(nibName: "LineMessageTableViewCell", bundle: nil)
         self.lineTableView.registerNib(cell, forCellReuseIdentifier: "messageCell")
         let leftCell = UINib(nibName: "LeftTableViewCell", bundle: nil)
         self.lineTableView.registerNib(leftCell, forCellReuseIdentifier: "LeftTableViewCell")
 
-        
+        // キーボード出現のNotificationを登録
         let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self, selector: "showKeyboard:", name: UIKeyboardWillShowNotification, object: nil)
         nc.addObserver(self, selector: "hideKyeboard:", name: UIKeyboardWillHideNotification, object: nil)
-        //nc.addObserver(self, selector: "showKeyboard:", name: UITextInputCurrentInputModeDidChangeNotification, object: nil)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.view.translatesAutoresizingMaskIntoConstraints = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,99 +65,132 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         // Dispose of any resources that can be recreated.
     }
 
+    // tableViewと相談↓
+    // セクションの数どうする？
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
+    // セルの数どうする？
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.data.count
     }
     
+    // セルの中身どうする？
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if(self.dataType[indexPath.row] == "right"){
+        // 自分の投稿と他人の投稿でセルを分ける
+        if self.data[indexPath.row]["who"] == "my" {
+            // セルを呼んでくる
             let cell = tableView.dequeueReusableCellWithIdentifier("messageCell", forIndexPath: indexPath) as! LineMessageTableViewCell
-            let width = cell.messageLabel.frame.size.width
-            cell.messageLabel.text = self.data[indexPath.row]
+            // 部品を設定
+            cell.messageLabel.text = self.data[indexPath.row]["message"]
+            // labelのサイズを文字数で調節
             cell.messageLabel.sizeToFit()
-            cell.messageLabel.frame.size.width = width
-            cell.messageImageView.frame.size.height = CGRectGetHeight(cell.messageLabel.frame) + 20
+            // 吹き出し画像の高さ調整
+            cell.heightMessageImageView.constant = CGRectGetHeight(cell.messageLabel.frame) + 22
+            // 背景を透明にする
             cell.backgroundColor = UIColor.clearColor()
             return cell
-        }else{
+        }
+        else {
             let cell = tableView.dequeueReusableCellWithIdentifier("LeftTableViewCell", forIndexPath: indexPath) as! LeftTableViewCell
-            let width = cell.messageLabel.frame.size.width
-            cell.messageLabel.text = self.data[indexPath.row]
+            cell.messageLabel.text = self.data[indexPath.row]["message"]
             cell.messageLabel.sizeToFit()
-            cell.messageLabel.frame.size.width = width
-            cell.messageImageView.frame.size.height = CGRectGetHeight(cell.messageLabel.frame) + 20
+            cell.heightMessageImageView.constant = CGRectGetHeight(cell.messageLabel.frame) + 22
             cell.backgroundColor = UIColor.clearColor()
             return cell
         }
     }
-
+    
+    // セルの高さどうする？
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if(self.dataType[indexPath.row] == "right"){
+        if self.data[indexPath.row]["who"] == "my" {
+            // セルを呼んでくる
             let cell = self.lineTableView.dequeueReusableCellWithIdentifier("messageCell") as! LineMessageTableViewCell
-            //let width = cell.messageLabel.frame.size.width
-            cell.messageLabel.text = self.data[indexPath.row]
+            // データを入れて高さを計算
+            cell.messageLabel.text = self.data[indexPath.row]["message"]
             cell.messageLabel.sizeToFit()
-            //cell.messageLabel.frame.size.width = width
             return cell.messageLabel.frame.size.height + 35
-        }else{
+        }
+        else{
             let cell = self.lineTableView.dequeueReusableCellWithIdentifier("LeftTableViewCell") as! LeftTableViewCell
-            let width = cell.messageLabel.frame.size.width
-            cell.messageLabel.text = self.data[indexPath.row]
+            cell.messageLabel.text = self.data[indexPath.row]["message"]
             cell.messageLabel.sizeToFit()
-            cell.messageLabel.frame.size.width = width
             return cell.messageLabel.frame.size.height + 35
         }
     }
     
+    // キーボードのNotification
     func showKeyboard(notification: NSNotification!) {
+        // キーボードのframe情報取得
         let rect = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        // キーボードの移動速度
         let duration:NSTimeInterval = notification?.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        
+        // キーボードの移動速度に合わせて移動する
+        self.marginBottomCommentView.constant = -rect.size.height
         UIView.animateWithDuration(duration, animations: { () -> Void in
-            self.commentView.frame.origin.y = self.view.frame.size.height - rect.size.height - self.commentView.frame.size.height
-            
-            self.lineTableView.frame = CGRectMake(self.lineTableView.frame.origin.x, self.lineTableView.frame.origin.y, self.lineTableView.frame.size.width, self.commentView.frame.origin.y - self.lineTableView.frame.origin.y)
+            self.view.layoutIfNeeded()
         })
+        
+        // tableViewを最終地点までスクロールさせる
         if(self.lineTableView.contentSize.height - self.lineTableView.frame.size.height > 0){
             self.lineTableView.contentOffset.y = self.lineTableView.contentSize.height - self.lineTableView.frame.size.height
         }
     }
     
     func hideKyeboard(notification: NSNotification!) {
-        let rect = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        // キーボードの移動速度
         let duration:NSTimeInterval = notification?.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        
+        // キーボードの移動速度に合わせて隠す
+        self.marginBottomCommentView.constant = 0
         UIView.animateWithDuration(duration, animations: { () -> Void in
-            self.commentView.frame.origin.y = self.view.frame.size.height - self.commentView.frame.size.height
-            
-            self.lineTableView.frame = CGRectMake(self.lineTableView.frame.origin.x, self.lineTableView.frame.origin.y, self.lineTableView.frame.size.width, self.commentView.frame.origin.y - self.lineTableView.frame.origin.y)
+            self.view.layoutIfNeeded()
         })
     }
     
     @IBAction func sendMessage(sender: AnyObject) {
-        self.data.append(self.commentTextField.text!)
-        self.dataType.append("right")
+        // textFieldのデータ取得
+        let message = self.commentTextField.text
+        // データを追加する
+        let addData: [String: String] = [
+            "message": message!,
+            "who": "my"
+        ]
+        self.data.append(addData)
         
+        // textFieldの編集終了
         self.commentTextField.endEditing(true)
         self.commentTextField.text = ""
         
+        // tableViewと相談し直す
         self.lineTableView.reloadData()
+        // tableViewを最終地点までスクロールする
         if(self.lineTableView.contentSize.height - self.lineTableView.frame.size.height > 0){
             self.lineTableView.contentOffset.y = self.lineTableView.contentSize.height - self.lineTableView.frame.size.height
         }
         
+        // 返信用のタイマーをセットする
         self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "someoneTalk", userInfo: nil, repeats: false)
     }
     
     func someoneTalk() {
+        // 乱数を生成して、返信を選ぶ
         let dataCount = self.someOneData.count
         let randomNum = arc4random() % UInt32(dataCount)
         let message = self.someOneData[Int(randomNum)]
-        self.data.append(message)
-        self.dataType.append("left")
+        
+        // データを追加する
+        let addData: [String: String] = [
+            "message": message,
+            "who": "other"
+        ]
+        self.data.append(addData)
+        
+        // tableViewと相談し直す
         self.lineTableView.reloadData()
+        // 最終地点までスクロールする
         if(self.lineTableView.contentSize.height - self.lineTableView.frame.size.height > 0){
             self.lineTableView.contentOffset.y = self.lineTableView.contentSize.height - self.lineTableView.frame.size.height
         }
