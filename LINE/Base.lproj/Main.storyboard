@@ -1,9 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="aoS-Hc-fUk">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aoS-Hc-fUk">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--LINE-->
@@ -15,38 +19,39 @@
                         <viewControllerLayoutGuide type="bottom" id="5kp-b9-pMF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="背景.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="pbD-4R-yzk">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="VFf-Xp-Bk4">
-                                <rect key="frame" x="0.0" y="62" width="320" height="455"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="62" width="375" height="554"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgD-7Q-Kof">
-                                <rect key="frame" x="0.0" y="517" width="320" height="51"/>
+                                <rect key="frame" x="0.0" y="616" width="375" height="51"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ED1-wA-dnN">
-                                        <rect key="frame" x="8" y="11" width="258" height="30"/>
+                                        <rect key="frame" x="8" y="11" width="313" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h9W-o0-DzT">
-                                        <rect key="frame" x="274" y="11" width="30" height="30"/>
+                                        <rect key="frame" x="329" y="11" width="30" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="7iZ-b2-gVQ"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="送信">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="sendMessage:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="78F-Qt-NbA"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="ED1-wA-dnN" firstAttribute="centerY" secondItem="fgD-7Q-Kof" secondAttribute="centerY" id="2JI-MJ-FnJ"/>
                                     <constraint firstAttribute="trailing" secondItem="h9W-o0-DzT" secondAttribute="trailing" constant="16" id="2lF-D3-fJ3"/>
@@ -57,7 +62,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="VFf-Xp-Bk4" firstAttribute="trailing" secondItem="fgD-7Q-Kof" secondAttribute="trailing" id="HTX-qc-hqN"/>
                             <constraint firstItem="VFf-Xp-Bk4" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="62" id="NqP-wX-nA7"/>
@@ -73,7 +78,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="LINE" id="vTq-Ff-C7A"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="commentTextField" destination="ED1-wA-dnN" id="dze-9d-8VA"/>
                         <outlet property="commentView" destination="fgD-7Q-Kof" id="odc-Um-RF1"/>

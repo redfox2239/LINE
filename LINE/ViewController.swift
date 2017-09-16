@@ -31,7 +31,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         "o(｀ω´*)oﾌﾟﾝｽｶﾌﾟﾝｽｶ!!",
     ]
     // 返信用タイマーを用意
-    var timer:NSTimer!
+    var timer:Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,21 +42,21 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.lineTableView.dataSource = self
         
         // tableViewの背景を透明にする
-        self.lineTableView.backgroundColor = UIColor.clearColor()
+        self.lineTableView.backgroundColor = UIColor.clear
         
         //カスタムセルの登録
         let cell = UINib(nibName: "LineMessageTableViewCell", bundle: nil)
-        self.lineTableView.registerNib(cell, forCellReuseIdentifier: "messageCell")
+        self.lineTableView.register(cell, forCellReuseIdentifier: "messageCell")
         let leftCell = UINib(nibName: "LeftTableViewCell", bundle: nil)
-        self.lineTableView.registerNib(leftCell, forCellReuseIdentifier: "LeftTableViewCell")
+        self.lineTableView.register(leftCell, forCellReuseIdentifier: "LeftTableViewCell")
 
         // キーボード出現のNotificationを登録
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.addObserver(self, selector: "showKeyboard:", name: UIKeyboardWillShowNotification, object: nil)
-        nc.addObserver(self, selector: "hideKyeboard:", name: UIKeyboardWillHideNotification, object: nil)
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(ViewController.showKeyboard(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        nc.addObserver(self, selector: #selector(ViewController.hideKyeboard(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         self.view.translatesAutoresizingMaskIntoConstraints = true
     }
 
@@ -67,69 +67,71 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
     // tableViewと相談↓
     // セクションの数どうする？
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     // セルの数どうする？
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.data.count
     }
     
     // セルの中身どうする？
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 自分の投稿と他人の投稿でセルを分ける
         if self.data[indexPath.row]["who"] == "my" {
             // セルを呼んでくる
-            let cell = tableView.dequeueReusableCellWithIdentifier("messageCell", forIndexPath: indexPath) as! LineMessageTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as! LineMessageTableViewCell
             // 部品を設定
             cell.messageLabel.text = self.data[indexPath.row]["message"]
             // labelのサイズを文字数で調節
             cell.messageLabel.sizeToFit()
             // 吹き出し画像の高さ調整
-            cell.heightMessageImageView.constant = CGRectGetHeight(cell.messageLabel.frame) + 22
+            cell.heightMessageImageView.constant = cell.messageLabel.frame.height + 22
             // 背景を透明にする
-            cell.backgroundColor = UIColor.clearColor()
+            cell.backgroundColor = UIColor.clear
             return cell
         }
         else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("LeftTableViewCell", forIndexPath: indexPath) as! LeftTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LeftTableViewCell", for: indexPath) as! LeftTableViewCell
             cell.messageLabel.text = self.data[indexPath.row]["message"]
             cell.messageLabel.sizeToFit()
-            cell.heightMessageImageView.constant = CGRectGetHeight(cell.messageLabel.frame) + 22
-            cell.backgroundColor = UIColor.clearColor()
+            cell.heightMessageImageView.constant = cell.messageLabel.frame.height + 22
+            cell.backgroundColor = UIColor.clear
             return cell
         }
     }
     
     // セルの高さどうする？
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if self.data[indexPath.row]["who"] == "my" {
             // セルを呼んでくる
-            let cell = self.lineTableView.dequeueReusableCellWithIdentifier("messageCell") as! LineMessageTableViewCell
+            let cell = self.lineTableView.dequeueReusableCell(withIdentifier: "messageCell") as! LineMessageTableViewCell
             // データを入れて高さを計算
+            print(cell.messageLabel.frame)
             cell.messageLabel.text = self.data[indexPath.row]["message"]
             cell.messageLabel.sizeToFit()
-            return cell.messageLabel.frame.size.height + 35
+            print(cell.messageLabel.frame)
+            return cell.messageLabel.frame.size.height + 40
         }
         else{
-            let cell = self.lineTableView.dequeueReusableCellWithIdentifier("LeftTableViewCell") as! LeftTableViewCell
+            let cell = self.lineTableView.dequeueReusableCell(withIdentifier: "LeftTableViewCell") as! LeftTableViewCell
             cell.messageLabel.text = self.data[indexPath.row]["message"]
             cell.messageLabel.sizeToFit()
-            return cell.messageLabel.frame.size.height + 35
+            return cell.messageLabel.frame.size.height + 40
         }
     }
     
     // キーボードのNotification
-    func showKeyboard(notification: NSNotification!) {
+    func showKeyboard(_ notification: Notification!) {
         // キーボードのframe情報取得
-        let rect = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let rect = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         // キーボードの移動速度
-        let duration:NSTimeInterval = notification?.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        let duration:TimeInterval = notification?.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
         
         // キーボードの移動速度に合わせて移動する
         self.marginBottomCommentView.constant = -rect.size.height
-        UIView.animateWithDuration(duration, animations: { () -> Void in
+        UIView.animate(withDuration: duration, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })
         
@@ -139,18 +141,18 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
     }
     
-    func hideKyeboard(notification: NSNotification!) {
+    func hideKyeboard(_ notification: Notification!) {
         // キーボードの移動速度
-        let duration:NSTimeInterval = notification?.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        let duration:TimeInterval = notification?.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
         
         // キーボードの移動速度に合わせて隠す
         self.marginBottomCommentView.constant = 0
-        UIView.animateWithDuration(duration, animations: { () -> Void in
+        UIView.animate(withDuration: duration, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })
     }
     
-    @IBAction func sendMessage(sender: AnyObject) {
+    @IBAction func sendMessage(_ sender: AnyObject) {
         // textFieldのデータ取得
         let message = self.commentTextField.text
         // データを追加する
@@ -172,7 +174,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
         
         // 返信用のタイマーをセットする
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "someoneTalk", userInfo: nil, repeats: false)
+        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ViewController.someoneTalk), userInfo: nil, repeats: false)
     }
     
     func someoneTalk() {
