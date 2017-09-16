@@ -28,7 +28,6 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fowfjao;ewjfoafj;ajf;wajfajf;ajf;afje;af;oajefo;awe" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FoX-Wi-PGj">
                         <rect key="frame" x="42" y="21" width="109" height="96"/>
-                        <color key="backgroundColor" red="0.56964778644761982" green="0.93524008989334106" blue="0.34195701115854954" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="109" id="rb7-pa-OIq"/>
                         </constraints>
